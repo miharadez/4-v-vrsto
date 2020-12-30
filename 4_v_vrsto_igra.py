@@ -189,13 +189,13 @@ def st_novih_trojk(igra):
         n = n + 1
     for i in range(3):
         if b[i : i + 3] == trivvrsto:
-            n = n + 1.3
+            n = n + 1.5
             #popravek parametra za boljšo igro
 
         if c[i : i + 3] == trivvrsto:
-            n = n + 1
+            n = n + 1.3
         if d[i : i + 3] == trivvrsto:
-            n = n + 1
+            n = n + 1.3
     return n
 
 def igraj(igra, robot=robot5, igralec=1):
