@@ -253,5 +253,5 @@ def polno(igra):
         print("Nasvidenje")
         
 
-d = Igra()
-igraj(d)
+"""d = Igra()
+igraj(d)"""
