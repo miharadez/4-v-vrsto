@@ -1,28 +1,29 @@
 import bottle
+import pathlib
+import os
 
 from cela_igra import *
 
+pot = os.path.join(pathlib.Path(__file__).parent.absolute(), "views")
 
-
-pot_do_views = r"C:\Users\mihar\OneDrive\Namizje\2.letnik\racunalnistvo\projekt\4VVrsto\views"
 d = Igra((7, 6), 0, [], [], prosti=[0 for i in range(7)], kam = (0,0))
 
 @bottle.get("/")
 def predstavi():
-    return bottle.template(pot_do_views + r"\poimenuj")
+    return bottle.template(os.path.join(pot, "poimenuj.tpl"))
 
 @bottle.post("/poimenuj/")
 def preusmeri():
     a = bottle.request.forms["a"]
-    return bottle.template(pot_do_views + r"\preusmeri", ime = a)
+    return bottle.template(os.path.join(pot, "preusmeri.tpl"), ime = a)
 
 @bottle.post("/<ime>/")
 def pozdravi(ime):
-    return bottle.template(pot_do_views + r"\level", ime = ime)
+    return bottle.template(os.path.join(pot, "level.tpl"), ime = ime)
 
 @bottle.post("/<ime>/<level>/")
 def izbira_parametrov(ime, level):
-    return bottle.template(pot_do_views + r"\igralec", ime = ime, level = level)
+    return bottle.template(os.path.join(pot, "igralec.tpl"), ime = ime, level = level)
 
 @bottle.post("/<ime>/<level>/<igralec>/")
 def prva_poteza(ime, level, igralec):
@@ -63,7 +64,7 @@ def prva_poteza(ime, level, igralec):
         z.append(b)
 
         
-    return bottle.template(pot_do_views + r"\poteza", ime = ime, level = level, igralec = igralec, tabela = tuple(z), opcije = tuple(op))
+    return bottle.template(os.path.join(pot, "poteza.tpl"), ime = ime, level = level, igralec = igralec, tabela = tuple(z), opcije = tuple(op))
 
 @bottle.post("/<ime>/<level>/<igralec>/<opcija>/")
 def naslednje_poteze(ime, level, igralec, opcija):
@@ -87,11 +88,11 @@ def naslednje_poteze(ime, level, igralec, opcija):
     tabela = tuple(z)
 
     if d.zmaga(): #igralec je zmagal
-        return bottle.template(pot_do_views + r"\zmaga", ime = ime, tabela = tabela)
+        return bottle.template(os.path.join(pot, "zmaga.tpl"), ime = ime, tabela = tabela)
 
     if d.prosti == [d.velikost[1] for i in range(d.velikost[0])]:
         #vse polno-> izenačenje
-        return bottle.template(pot_do_views + r"\polno", ime = ime, level = level, igralec = igralec, tabela = tuple(z))
+        return bottle.template(os.path.join(pot, "polno.tpl"), ime = ime, level = level, igralec = igralec, tabela = tuple(z))
 
     else:
         if level == "zelo lahko":
@@ -122,16 +123,16 @@ def naslednje_poteze(ime, level, igralec, opcija):
         z.append(b)
 
     if d.zmaga(): #igralec je zmagal
-        return bottle.template(pot_do_views + r"\poraz", ime = ime, tabela = tuple(z))
+        return bottle.template(os.path.join(pot, "poraz.tpl"), ime = ime, tabela = tuple(z))
 
     if d.prosti == [d.velikost[1] for i in range(d.velikost[0])]:
         #vse polno-> izenačenje
-        return bottle.template(pot_do_views + r"\polno", ime = ime, level = level, igralec = igralec, tabela = tuple(z))
+        return bottle.template(os.path.join(pot, "polno.tpl"), ime = ime, level = level, igralec = igralec, tabela = tuple(z))
 
     
     else:
         op = (d.kam_lahko())
-        return bottle.template(pot_do_views + r"\poteza", ime = ime, level = level, igralec = igralec, tabela = tuple(z), opcije = tuple(op))
+        return bottle.template(os.path.join(pot, "poteza.tpl"), ime = ime, level = level, igralec = igralec, tabela = tuple(z), opcije = tuple(op))
 
 
 bottle.run(debug = True, reloader = True)
