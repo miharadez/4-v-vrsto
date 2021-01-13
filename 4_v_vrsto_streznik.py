@@ -14,7 +14,7 @@ def predstavi():
 
 @bottle.post("/poimenuj/")
 def preusmeri():
-    a = bottle.request.forms["a"]
+    a = bottle.request.forms.a
     return bottle.template(os.path.join(pot, "preusmeri.tpl"), ime = a)
 
 @bottle.post("/<ime>/")
