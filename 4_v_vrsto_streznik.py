@@ -27,8 +27,6 @@ def izbira_parametrov(ime, level):
 
 @bottle.post("/<ime>/<level>/<igralec>/")
 def prva_poteza(ime, level, igralec):
-    """e = Igra((7, 6), 0, [], [], prosti=[0 for i in range(7)], kam = (0,0))
-    d = e"""
     d.poteza = 0
     d.rdeci = []
     d.rumeni = []
@@ -53,14 +51,14 @@ def prva_poteza(ime, level, igralec):
 
     z = []
     for i in range(d.velikost[1] - 1, -1, -1):
-        b = "|"
+        b = "||"
         for j in range(d.velikost[0]):
             if (j, i) in d.rdeci:
-                b = b +"_O_|"
+                b = b +"&#128308;||"
             elif (j, i) in d.rumeni:
-                b = b + "_#_|"
+                b = b + "&#128309;||"
             else:
-                b = b + "___|"
+                b = b + "&#9898;||"
         z.append(b)
 
         
@@ -76,14 +74,14 @@ def naslednje_poteze(ime, level, igralec, opcija):
 
     z = []
     for i in range(d.velikost[1] - 1, -1, -1):
-        b = "|"
+        b = "||"
         for j in range(d.velikost[0]):
             if (j, i) in d.rdeci:
-                b = b +"_O_|"
+                b = b +"&#128308;||"
             elif (j, i) in d.rumeni:
-                b = b + "_#_|"
+                b = b + "&#128309;||"
             else:
-                b = b + "___|"
+                b = b + "&#9898;||"
         z.append(b)
     tabela = tuple(z)
 
@@ -112,14 +110,14 @@ def naslednje_poteze(ime, level, igralec, opcija):
 
     z = []
     for i in range(d.velikost[1] - 1, -1, -1):
-        b = "|"
+        b = "||"
         for j in range(d.velikost[0]):
             if (j, i) in d.rdeci:
-                b = b +"_O_|"
+                b = b +"&#128308;||"
             elif (j, i) in d.rumeni:
-                b = b + "_#_|"
+                b = b + "&#128309;||"
             else:
-                b = b + "___|"
+                b = b + "&#9898;||"
         z.append(b)
 
     if d.zmaga(): #igralec je zmagal
