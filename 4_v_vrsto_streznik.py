@@ -51,14 +51,14 @@ def prva_poteza(ime, level, igralec):
 
     z = []
     for i in range(d.velikost[1] - 1, -1, -1):
-        b = "||"
+        b = "   "
         for j in range(d.velikost[0]):
             if (j, i) in d.rdeci:
-                b = b +"&#128308;||"
+                b = b +"&#128308;&#160;&#160;&#160;"
             elif (j, i) in d.rumeni:
-                b = b + "&#128309;||"
+                b = b + "&#128309;&#160;&#160;&#160;"
             else:
-                b = b + "&#9898;||"
+                b = b + "&#9898;&#160;&#160;&#160;"
         z.append(b)
 
         
@@ -74,14 +74,14 @@ def naslednje_poteze(ime, level, igralec, opcija):
 
     z = []
     for i in range(d.velikost[1] - 1, -1, -1):
-        b = "||"
+        b = "   "
         for j in range(d.velikost[0]):
             if (j, i) in d.rdeci:
-                b = b +"&#128308;||"
+                b = b +"&#128308;&#160;&#160;&#160;"
             elif (j, i) in d.rumeni:
-                b = b + "&#128309;||"
+                b = b + "&#128309;&#160;&#160;&#160;"
             else:
-                b = b + "&#9898;||"
+                b = b + "&#9898;&#160;&#160;&#160;"
         z.append(b)
     tabela = tuple(z)
 
@@ -110,14 +110,14 @@ def naslednje_poteze(ime, level, igralec, opcija):
 
     z = []
     for i in range(d.velikost[1] - 1, -1, -1):
-        b = "||"
+        b = "   "
         for j in range(d.velikost[0]):
             if (j, i) in d.rdeci:
-                b = b +"&#128308;||"
+                b = b +"&#128308;&#160;&#160;&#160;"
             elif (j, i) in d.rumeni:
-                b = b + "&#128309;||"
+                b = b + "&#128309;&#160;&#160;&#160;"
             else:
-                b = b + "&#9898;||"
+                b = b + "&#9898;&#160;&#160;&#160;"
         z.append(b)
 
     if d.zmaga(): #igralec je zmagal
