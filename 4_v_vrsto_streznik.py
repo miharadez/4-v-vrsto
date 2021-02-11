@@ -45,9 +45,6 @@ def prva_poteza(ime, level, igralec):
         else:
             n = (robot5(d))
         d.dodaj(n)
-    rd = (d.rdeci)
-    ru = (d.rumeni)
-    op = (d.kam_lahko())
 
     z = []
     for i in range(d.velikost[1] - 1, -1, -1):
@@ -62,15 +59,27 @@ def prva_poteza(ime, level, igralec):
         z.append(b)
 
         
-    return bottle.template(os.path.join(pot, "poteza.tpl"), ime = ime, level = level, igralec = igralec, tabela = tuple(z), opcije = tuple(op))
+    return bottle.template(os.path.join(pot, "poteza.tpl"), ime = ime, level = level, igralec = igralec, tabela = tuple(z))
 
 @bottle.post("/<ime>/<level>/<igralec>/<opcija>/")
 def naslednje_poteze(ime, level, igralec, opcija):
-    d.dodaj(int(opcija))
+    if int(opcija) not in d.kam_lahko():
+        z = []
+        for i in range(d.velikost[1] - 1, -1, -1):
+            b = "   "
+            for j in range(d.velikost[0]):
+                if (j, i) in d.rdeci:
+                    b = b +"&#128308;&#160;&#160;&#160;"
+                elif (j, i) in d.rumeni:
+                    b = b + "&#128309;&#160;&#160;&#160;"
+                else:
+                    b = b + "&#9898;&#160;&#160;&#160;"
+            z.append(b)
+        tabela = tuple(z)
+        return bottle.template(os.path.join(pot, "poteza.tpl"), ime = ime, level = level, igralec = igralec, tabela = tuple(z))
 
-    rd = (d.rdeci)
-    ru = (d.rumeni)
-    op = (d.kam_lahko())
+    else:
+        d.dodaj(int(opcija))
 
     z = []
     for i in range(d.velikost[1] - 1, -1, -1):
@@ -105,9 +114,6 @@ def naslednje_poteze(ime, level, igralec, opcija):
             n = (robot5(d))
         d.dodaj(n)
 
-    rd = (d.rdeci)
-    ru = (d.rumeni)
-
     z = []
     for i in range(d.velikost[1] - 1, -1, -1):
         b = "   "
@@ -129,8 +135,7 @@ def naslednje_poteze(ime, level, igralec, opcija):
 
     
     else:
-        op = (d.kam_lahko())
-        return bottle.template(os.path.join(pot, "poteza.tpl"), ime = ime, level = level, igralec = igralec, tabela = tuple(z), opcije = tuple(op))
+        return bottle.template(os.path.join(pot, "poteza.tpl"), ime = ime, level = level, igralec = igralec, tabela = tuple(z))
 
 
 bottle.run(debug = True, reloader = True)
