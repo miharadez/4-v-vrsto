@@ -2,13 +2,23 @@ import random
 
 
 class Igra:
-    def __init__(self, velikost=(7, 6), poteza=0, rdeci=[],
-                 rumeni=[], prosti=[0 for i in range(7)], kam=(0, 0)):
+    def __init__(self, velikost=(7, 6), poteza=0, rdeci=None,
+                 rumeni=None, prosti=None, kam=(0, 0)):
         self.poteza = poteza
-        self.rdeci = rdeci
-        self.rumeni = rumeni
+        if rdeci == None:
+            self.rdeci = []
+        else:
+            self.rdeci = rdeci
+        if rumeni == None:
+            self.rumeni = []
+        else:
+            self.rumeni = rumeni
         self.velikost = velikost
         self.prosti = prosti
+        if prosti == None:
+            self.prosti = [0 for i in range(7)]
+        else:
+            self.prosti = prosti
         self.kam = kam
 
     def __repr__(self, znak1="O", znak2="#"):  # kako bo izgledala tabela
